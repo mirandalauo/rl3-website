@@ -14,7 +14,10 @@ export default function Hero() {
           <FadeUp delay={0.1}>
             <h1 className="font-[family-name:var(--font-space-grotesk)] text-[clamp(2.5rem,5vw,4.5rem)] font-bold tracking-[-0.03em] leading-[1.08] mb-8">
               Cada iteracion nos acerca al{" "}
-              <span className="text-rl3-accent">resultado optimo</span>
+              <span className="text-rl3-accent relative">
+                <span className="absolute inset-0 blur-2xl bg-rl3-accent/20 -z-10" aria-hidden="true" />
+                resultado optimo
+              </span>
             </h1>
           </FadeUp>
 
