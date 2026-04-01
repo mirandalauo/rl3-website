@@ -1,9 +1,17 @@
 import { Resend } from "resend";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+export const dynamic = "force-dynamic";
 
 export async function POST(request: Request) {
   try {
+    const apiKey = process.env.RESEND_API_KEY;
+    if (!apiKey) {
+      return Response.json(
+        { error: "Servicio de email no configurado." },
+        { status: 503 }
+      );
+    }
+
     const { name, email, message } = await request.json();
 
     if (!name || !email || !message) {
@@ -13,6 +21,7 @@ export async function POST(request: Request) {
       );
     }
 
+    const resend = new Resend(apiKey);
     const contactEmail = process.env.CONTACT_EMAIL || "rl3aiboutique@gmail.com";
 
     await resend.emails.send({
